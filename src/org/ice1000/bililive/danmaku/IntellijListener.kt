@@ -6,6 +6,8 @@ import charlie.bililivelib.danmaku.datamodel.StartStopInfo
 import charlie.bililivelib.danmaku.datamodel.WelcomeVipInfo
 import charlie.bililivelib.danmaku.event.DanmakuEvent
 import charlie.bililivelib.danmaku.event.DanmakuListener
+import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.editor.Document
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.popup.JBPopupFactory
@@ -14,9 +16,13 @@ import org.intellij.lang.annotations.Language
 
 class IntellijListener(
 	private val project: Project?,
-	private val watcher: (Long) -> Unit,
-	private val show: (String) -> Unit
+	private val window: DanmakuWindow,
+	private val document: Document
 ) : DanmakuListener {
+	private fun show(msg: String) = WriteCommandAction.runWriteCommandAction(project) {
+		document.insertString(0, msg + "\n")
+	}
+
 	override fun errorEvent(event: DanmakuEvent) {
 		val info = event.param as? Exception ?: return
 		info.printStackTrace()
@@ -34,7 +40,7 @@ class IntellijListener(
 
 	override fun watcherCountEvent(event: DanmakuEvent) {
 		val count = event.param as? Number ?: return
-		watcher(count.toLong())
+		window.setWatcherCount(count.toLong())
 	}
 
 	override fun welcomeVipEvent(event: DanmakuEvent) {
@@ -76,7 +82,7 @@ class IntellijListener(
 	}
 
 	override fun statusEvent(event: DanmakuEvent) {
-		show("status: ${event.kind}, ${event.param}")
+		show(event.param.toString())
 	}
 
 	override fun globalGiftEvent(event: DanmakuEvent) {

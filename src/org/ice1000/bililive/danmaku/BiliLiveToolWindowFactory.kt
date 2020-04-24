@@ -59,11 +59,7 @@ class BiliLiveToolWindowFactory : ToolWindowFactory, DumbAware, Disposable {
 		WriteCommandAction.runWriteCommandAction(project) {
 			document.deleteString(0, document.textLength)
 		}
-		addDanmakuListener(IntellijListener(project, danmakuWindow::setWatcherCount) { msg ->
-			WriteCommandAction.runWriteCommandAction(project) {
-				document.insertString(0, msg + "\n")
-			}
-		})
+		addDanmakuListener(IntellijListener(project, danmakuWindow, document))
 		connect()
 	}
 }
