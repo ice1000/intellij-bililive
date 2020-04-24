@@ -13,6 +13,7 @@ fun main() {
 
 const val DEFAULT_ID = 937724
 const val NOTIFY = "!!"
+const val NOTIFY_ERROR = "!?"
 
 fun listen(id: Int): DanmakuReceiver {
 	val receiver = DanmakuReceiver(Room.getRealRoomID(id))

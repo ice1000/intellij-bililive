@@ -13,6 +13,10 @@ public class DanmakuWindow {
 	private JFormattedTextField roomId;
 	private JPanel content;
 
+	public DanmakuWindow() {
+		updateRoom.setDefaultCapable(true);
+	}
+
 	public @NotNull JPanel getComponent() {
 		return component;
 	}

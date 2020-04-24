@@ -8,6 +8,7 @@ import charlie.bililivelib.danmaku.event.DanmakuListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.popup.JBPopupFactory
+import com.intellij.openapi.wm.IdeFrame
 import com.intellij.openapi.wm.WindowManager
 import org.intellij.lang.annotations.Language
 
@@ -53,14 +54,22 @@ class IntellijListener(
 
 	private fun showInIde(text: String) {
 		if (text.startsWith(NOTIFY)) {
-			val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: return
 			@Language("HTML")
 			val html = "<html><h1>${text.removePrefix(NOTIFY)}</h1></html>"
-			JBPopupFactory.getInstance()
-				.createHtmlTextBalloonBuilder(html, MessageType.INFO, null)
-				.createBalloon()
-				.showInCenterOf(ideFrame.component)
+			showPopup(html, MessageType.INFO)
+		} else if (text.startsWith(NOTIFY_ERROR)) {
+			@Language("HTML")
+			val html = "<html><h1>${text.removePrefix(NOTIFY_ERROR)}</h1></html>"
+			showPopup(html, MessageType.ERROR)
 		}
+	}
+
+	private fun showPopup(html: String, type: MessageType) {
+		val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: return
+		JBPopupFactory.getInstance()
+			.createHtmlTextBalloonBuilder(html, type, null)
+			.createBalloon()
+			.showInCenterOf(ideFrame.component)
 	}
 
 	override fun statusEvent(event: DanmakuEvent) {
