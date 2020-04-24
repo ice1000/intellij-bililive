@@ -14,6 +14,7 @@ import org.intellij.lang.annotations.Language
 
 class IntellijListener(
 	private val project: Project?,
+	private val watcher: (Long) -> Unit,
 	private val show: (String) -> Unit
 ) : DanmakuListener {
 	override fun errorEvent(event: DanmakuEvent) {
@@ -33,7 +34,7 @@ class IntellijListener(
 
 	override fun watcherCountEvent(event: DanmakuEvent) {
 		val count = event.param as? Number ?: return
-		show("O_o +- (${count.toInt()})")
+		watcher(count.toLong())
 	}
 
 	override fun welcomeVipEvent(event: DanmakuEvent) {

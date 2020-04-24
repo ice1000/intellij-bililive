@@ -6,7 +6,7 @@ import charlie.bililivelib.room.Room
 
 fun main() {
 	listen(DEFAULT_ID).apply {
-		addDanmakuListener(IntellijListener(null, ::println))
+		addDanmakuListener(IntellijListener(null, ::println, ::println))
 		connect()
 	}
 }

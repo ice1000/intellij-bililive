@@ -12,9 +12,14 @@ public class DanmakuWindow {
 	private JButton updateRoom;
 	private JFormattedTextField roomId;
 	private JPanel content;
+	private JLabel watcherCount;
 
 	public DanmakuWindow() {
 		updateRoom.setDefaultCapable(true);
+	}
+
+	public void setWatcherCount(long count) {
+		watcherCount.setText(Long.toHexString(count));
 	}
 
 	public @NotNull JPanel getComponent() {

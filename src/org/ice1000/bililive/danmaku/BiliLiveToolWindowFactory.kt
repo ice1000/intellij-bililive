@@ -37,13 +37,13 @@ class BiliLiveToolWindowFactory : ToolWindowFactory, DumbAware, Disposable {
 		panel.updateRoom.addActionListener {
 			receiver?.disconnect()
 			val int = panel.roomId.text?.filter { it.isDigit() }?.toIntOrNull() ?: return@addActionListener
-			receiver = listen(int).apply { initWith(project, document) }
+			receiver = listen(int).apply { initWith(project, panel, document) }
 		}
 		panel.setContent(editor.component)
 		panel.roomId.text = DEFAULT_ID.toString()
 
 		(receiver ?: listen(DEFAULT_ID).also { receiver = it }).apply {
-			initWith(project, document)
+			initWith(project, panel, document)
 		}
 		val title = DanmakuBundle.message("danmaku.window.title")
 		window.title = title
@@ -51,13 +51,17 @@ class BiliLiveToolWindowFactory : ToolWindowFactory, DumbAware, Disposable {
 		Disposer.register(window.disposable, this)
 	}
 
-	private fun DanmakuReceiver.initWith(project: Project, document: Document) {
+	private fun DanmakuReceiver.initWith(
+		project: Project,
+		danmakuWindow: DanmakuWindow,
+		document: Document
+	) {
 		WriteCommandAction.runWriteCommandAction(project) {
 			document.deleteString(0, document.textLength)
 		}
-		addDanmakuListener(IntellijListener(project) { msg ->
+		addDanmakuListener(IntellijListener(project, danmakuWindow::setWatcherCount) { msg ->
 			WriteCommandAction.runWriteCommandAction(project) {
-				document.insertString(document.textLength, msg + "\n")
+				document.insertString(0, msg + "\n")
 			}
 		})
 		connect()
