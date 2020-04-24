@@ -2,13 +2,13 @@ package org.ice1000.bililive.danmaku
 
 import charlie.bililivelib.danmaku.datamodel.Danmaku
 import charlie.bililivelib.danmaku.datamodel.GiveGiftInfo
+import charlie.bililivelib.danmaku.datamodel.StartStopInfo
 import charlie.bililivelib.danmaku.datamodel.WelcomeVipInfo
 import charlie.bililivelib.danmaku.event.DanmakuEvent
 import charlie.bililivelib.danmaku.event.DanmakuListener
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.popup.JBPopupFactory
-import com.intellij.openapi.wm.IdeFrame
 import com.intellij.openapi.wm.WindowManager
 import org.intellij.lang.annotations.Language
 
@@ -26,7 +26,9 @@ class IntellijListener(
 	}
 
 	override fun startStopEvent(event: DanmakuEvent) {
-		show("startStop: ${event.kind}, ${event.param}")
+		val info = event.param as? StartStopInfo ?: return
+		if (info.isLiving) show("---v^-v^-v^---v^-v^-v^---")
+		else show("-------------------------")
 	}
 
 	override fun watcherCountEvent(event: DanmakuEvent) {
