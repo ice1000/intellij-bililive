@@ -46,13 +46,19 @@ class IntellijListener(
 
 	override fun danmakuEvent(event: DanmakuEvent) {
 		val info = event.param as? Danmaku ?: return
-		if (info.content.startsWith(NOTIFY)) {
-			val html = "<html>${info.content.removePrefix(NOTIFY)}</html>"
+		showInIde(info.content)
+		show("@${info.user.name}: ${info.content}")
+	}
+
+	private fun showInIde(text: String) {
+		if (text.startsWith(NOTIFY)) {
+			val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: return
+			val html = "<html>${text.removePrefix(NOTIFY)}</html>"
 			JBPopupFactory.getInstance()
 				.createHtmlTextBalloonBuilder(html, MessageType.INFO, null)
 				.createBalloon()
-				.showInCenterOf(WindowManager.getInstance().getIdeFrame(project)!!.component)
-		} else show("@${info.user.name}: ${info.content}")
+				.showInCenterOf(ideFrame.component)
+		}
 	}
 
 	override fun statusEvent(event: DanmakuEvent) {
