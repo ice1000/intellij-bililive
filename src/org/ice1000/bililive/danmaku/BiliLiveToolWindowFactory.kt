@@ -40,8 +40,9 @@ class BiliLiveToolWindowFactory : ToolWindowFactory, DumbAware, Disposable {
 			receiver = listen(int).apply { initWith(project, document) }
 		}
 		panel.setContent(editor.component)
+		panel.roomId.text = DEFAULT_ID.toString()
 
-		(receiver ?: listen(937724).also { receiver = it }).apply {
+		(receiver ?: listen(DEFAULT_ID).also { receiver = it }).apply {
 			initWith(project, document)
 		}
 		val title = DanmakuBundle.message("danmaku.window.title")

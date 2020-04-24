@@ -22,7 +22,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText resource-bundle="org/ice1000/bililive/danmaku/bilibili-bundle" key="danmaku.window.room-id"/>
+        </properties>
       </component>
       <grid id="6752a" binding="content" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>

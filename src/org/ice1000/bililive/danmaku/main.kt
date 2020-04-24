@@ -5,12 +5,13 @@ import charlie.bililivelib.danmaku.dispatch.*
 import charlie.bililivelib.room.Room
 
 fun main() {
-	listen(937724).apply {
+	listen(DEFAULT_ID).apply {
 		addDanmakuListener(IntellijListener(null, ::println))
 		connect()
 	}
 }
 
+const val DEFAULT_ID = 937724
 const val NOTIFY = "!!"
 
 fun listen(id: Int): DanmakuReceiver {
