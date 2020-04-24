@@ -1,0 +1,16 @@
+<idea-plugin>
+	<name>Bilibili Live Danmaku Assistant</name>
+	<vendor email="ice1000kotlin@foxmail.com" url="https://ice1000.org">ice1000</vendor>
+	<idea-version since-build="201.6666"/>
+
+	<depends>com.intellij.modules.platform</depends>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<toolWindow
+			side="true" id="Danmaku" anchor="right"
+			factoryClass="org.ice1000.bililive.danmaku.BiliLiveToolWindowFactory"/>
+	</extensions>
+
+	<actions>
+	</actions>
+</idea-plugin>
