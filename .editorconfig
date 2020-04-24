@@ -5,18 +5,8 @@ insert_final_newline = false
 indent_style = tab
 tab_width = 2
 indent_size = 2
-
-[gradle.properties]
-indent_size = 0
-
-[*.rst]
-indent_size = 3
-indent_style = space
+ij_continuation_indent_size = 2
 
 [*.yml]
 indent_style = space
 indent_size = 2
-
-[*.rs]
-indent_style = space
-indent_size = 4
