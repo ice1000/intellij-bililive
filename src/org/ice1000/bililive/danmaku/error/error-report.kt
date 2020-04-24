@@ -19,7 +19,7 @@
  * THE SOFTWARE.
  */
 
-package rs.pest.error
+package org.ice1000.bililive.danmaku.error
 
 import com.intellij.AbstractBundle
 import com.intellij.diagnostic.AbstractMessage

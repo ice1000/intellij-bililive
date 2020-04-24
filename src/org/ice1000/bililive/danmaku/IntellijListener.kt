@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.MessageType
 import com.intellij.openapi.ui.popup.JBPopupFactory
 import com.intellij.openapi.wm.WindowManager
+import org.intellij.lang.annotations.Language
 
 class IntellijListener(
 	private val project: Project?,
@@ -53,7 +54,8 @@ class IntellijListener(
 	private fun showInIde(text: String) {
 		if (text.startsWith(NOTIFY)) {
 			val ideFrame = WindowManager.getInstance().getIdeFrame(project) ?: return
-			val html = "<html>${text.removePrefix(NOTIFY)}</html>"
+			@Language("HTML")
+			val html = "<html><h1>${text.removePrefix(NOTIFY)}</h1></html>"
 			JBPopupFactory.getInstance()
 				.createHtmlTextBalloonBuilder(html, MessageType.INFO, null)
 				.createBalloon()

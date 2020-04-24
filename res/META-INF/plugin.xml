@@ -9,6 +9,8 @@
 		<toolWindow
 			side="true" id="Danmaku" anchor="right"
 			factoryClass="org.ice1000.bililive.danmaku.BiliLiveToolWindowFactory"/>
+		<errorHandler
+			implementation="org.ice1000.bililive.danmaku.error.GitHubErrorReporter"/>
 	</extensions>
 
 	<actions>
