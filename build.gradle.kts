@@ -89,7 +89,6 @@ sourceSets {
 
 repositories {
 	mavenCentral()
-	jcenter()
 }
 
 dependencies {
@@ -99,9 +98,9 @@ dependencies {
 	}
 	implementation(group = "com.github.cqjjjzr", name = "charlie.bililivelib", version = "rv5") {
 		exclude(module = "kotlin-stdlib")
+		exclude(module = "gson")
+		exclude(module = "httpclient")
 	}
-	testImplementation(kotlin("test-junit"))
-	testImplementation("junit", "junit", "4.12")
 }
 
 task("displayCommitHash") {
