@@ -15,4 +15,4 @@ Speical syntax support: danmaku starting from `!!` will create an IDE popup.
 
 Example taken from Lexburner's live:
 
-![image](https://user-images.githubusercontent.com/16398479/80230087-01124100-8684-11ea-9cb5-a48b816210bd.png)
+![image](https://user-images.githubusercontent.com/16398479/80315010-86822680-8827-11ea-985e-1b2fc31a5768.png)
