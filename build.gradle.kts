@@ -10,7 +10,7 @@ val commitHash = Runtime.getRuntime().exec("git rev-parse --short HEAD").run {
 	output.trim()
 }
 
-val pluginComingVersion = "1.1"
+val pluginComingVersion = "1.2"
 val pluginVersion = if (isCI) "$pluginComingVersion-$commitHash" else pluginComingVersion
 val packageName = "org.ice1000.bililive.danmaku"
 

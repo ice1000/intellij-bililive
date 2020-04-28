@@ -1,1 +1,1 @@
-rootProject.name = "bililive"
+rootProject.name = "intellij-bililive"
